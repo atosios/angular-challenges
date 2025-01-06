@@ -8,10 +8,9 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card
-      [list]="students"
-      [type]="cardType"
-      customClass="bg-light-green"></app-card>
+    <app-card [list]="students" [type]="cardType" customClass="bg-light-green">
+      <img src="assets/img/student.webp" width="200px" />
+    </app-card>
   `,
   styles: [
     `
@@ -33,7 +32,6 @@ export class StudentCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
     this.store.students$.subscribe((s) => (this.students = s));
   }
 }

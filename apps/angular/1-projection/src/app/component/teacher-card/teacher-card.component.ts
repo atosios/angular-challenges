@@ -8,10 +8,9 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card
-      [list]="teachers"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+    <app-card [list]="teachers" [type]="cardType" customClass="bg-light-red">
+      <img src="assets/img/teacher.png" width="200px" />
+    </app-card>
   `,
   styles: [
     `
@@ -33,7 +32,6 @@ export class TeacherCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
     this.store.teachers$.subscribe((t) => (this.teachers = t));
   }
 }
