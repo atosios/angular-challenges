@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, computed, OnInit } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Todo } from './model/todo.model';
 import { TodosManagerService } from './service/todos-manager.service';
@@ -37,7 +37,8 @@ import { TodosManagerService } from './service/todos-manager.service';
     `,
   ],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+  title = 'demo-angular-jest';
   todos = computed(() => this.todosManager.getTodosSignal()());
 
   constructor(
@@ -45,16 +46,12 @@ export class AppComponent implements OnInit {
     public todosManager: TodosManagerService,
   ) {}
 
-  ngOnInit(): void {
-    return;
-  }
-
   getTodos() {
-    this.todosManager.fetch();
+    this.todosManager.fetch().subscribe();
   }
 
   updateTodo(todo: Todo) {
-    this.todosManager.update(todo);
+    this.todosManager.update(todo).subscribe();
   }
 
   deleteTodo(todo: Todo) {
